@@ -1,0 +1,37 @@
+<idea-plugin>
+    <id>ann.iFix.idea.plugin</id>
+    <name>IFIX : Fixing Multi-Threaded Programs Interactively</name>
+    <vendor email="" url="">IFix</vendor>
+
+    <description><![CDATA[
+    In this work, we propose a tool called IFIX which analyses a program while it is being programmed and identifies potentially concurrency issues like race conditions. IFIX automatically conjectures what the intended locking policy is and suggests fixing strategies accordingly. Furthermore, I F IX takes user feedback for reﬁning the conjectured locking policy and consequently future ﬁx suggestions. We conduct experiments on 43 concurrency programs, and a user study. The results show that IFIX is efficient, accurate and user-friendly.
+    ]]></description>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <!-- uncomment to enable plugin in all products
+    <depends>com.intellij.modules.lang</depends>
+    -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+        <toolWindow id="ifix.raceView" anchor="bottom" factoryClass="ifix.view.RaceView"></toolWindow>
+        <codeInsight.lineMarkerProvider language="JAVA" implementationClass="ifix.action.FixMarkerProvider"/>
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+        <action id="ifix.main" class="ifix.action.MainAction" text="Run IFIx" description="miao miao miao">
+            <add-to-group group-id="AnalyzeActions" anchor="last"/>
+        </action>
+
+        <action id="FixBasics.Fix"
+                class="ifix.action.FixAction"
+                text="Fix multi-thread error using iFix"
+                description="Fix multi-thread error by synchronizing">
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+        </action>
+    </actions>
+
+</idea-plugin>

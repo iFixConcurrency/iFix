@@ -1,0 +1,5 @@
+group = 'ann.iFix.increpta'
+
+dependencies {
+//     compile project(':ifix-eclipse')
+}

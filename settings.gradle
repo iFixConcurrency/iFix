@@ -1,0 +1,2 @@
+rootProject.name = 'iFix'
+include 'ifix-increpta', 'ifix-idea-plugin', 'ifix-main', 'ifix-eclipse'

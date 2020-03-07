@@ -1,0 +1,99 @@
+group = 'ann.iFix'
+
+// 所有子项目的通用配置
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'idea'
+
+    version = '1.0'
+
+    // JVM 版本号要求
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    // java编译的时候缺省状态下会因为中文字符而失败
+    [compileJava,compileTestJava,javadoc]*.options*.encoding = 'UTF-8'
+
+    sourceSets {
+
+        //设置源代码所在目录
+        main {
+            java.srcDirs = ['src/main/java']
+            resources.srcDirs = ['data', 'src/main/resources']
+        }
+
+        //设置测试代码所在目录
+        test {
+            java.srcDirs = ['src/test']
+        }
+    }
+
+    //定义版本号
+    ext {
+        walaversion = '1.5.4'
+        logbackversion = '1.2.3'
+        slf4jversion = '1.7.26'
+    }
+
+    repositories {
+        maven{
+            url 'http://maven.aliyun.com/nexus/content/groups/public'
+        }
+        mavenLocal()
+    }
+//
+//    jar {
+//        manifest {
+//            attributes("Implementation-Title": "Gradle")
+//        }
+//    }
+
+//    configurations {
+//        // 所有需要忽略的包定义在此
+//        all*.exclude group: 'commons-httpclient'
+//        all*.exclude group: 'commons-logging'
+//        all*.exclude group: 'commons-beanutils', module: 'commons-beanutils'
+//    }
+
+    dependencies {
+        // 通用依赖
+//        compile group: 'org.eclipse.platform', name: 'org.eclipse.ui', version:'3.114.0'
+//        compile group: 'org.eclipse.platform', name: 'org.eclipse.swt', version:'3.113.0'
+
+        compile group: 'org.eclipse.platform', name: 'org.eclipse.core.runtime', version:'3.17.0'
+        compile group: 'org.eclipse.jdt', name: 'org.eclipse.jdt.core', version:'3.20.0'
+//        compile group: 'org.eclipse.jdt', name: 'org.eclipse.jdt.ui', version:'3.19.0'
+        compile group: 'com.typesafe.akka', name: 'akka-actor_2.11', version:'2.4.17'
+        compile group: 'com.ibm.wala', name: 'com.ibm.wala.cast', version:walaversion
+        compile group: 'com.ibm.wala', name: 'com.ibm.wala.cast.java', version:walaversion
+        // conflict with org.eclipse.core.runtime, may cost NoSuchMethodException
+        compile(group: 'com.ibm.wala', name: 'com.ibm.wala.cast.java.ecj', version:walaversion) {
+           exclude group: 'org.eclipse.equinox', module : 'org.eclipse.equinox.common'
+        }
+        compile group: 'com.ibm.wala', name: 'com.ibm.wala.core', version:walaversion
+        compile group: 'com.ibm.wala', name: 'com.ibm.wala.util', version:walaversion
+        compile group: 'com.ibm.wala', name: 'com.ibm.wala.shrike', version:walaversion
+
+        // 依赖maven中不存在的jar
+        ext.jarTree = fileTree(dir: 'libs', include: '**/*.jar')
+        ext.rootProjectLibs = new File(rootProject.rootDir, 'libs').getAbsolutePath()
+        ext.jarTree += fileTree(dir: rootProjectLibs, include: '**/*.jar')
+
+        compile jarTree
+
+        // 测试依赖
+        testCompile group: 'junit', name: 'junit', version: '4.12'
+    }
+
+    // 显示当前项目下所有用于 compile 的 jar.
+//    task listJars(description: 'Display all compile jars.') << {
+//        configurations.compile.each { File file -> println file.name }
+//    }
+}
+
+//jar {
+//    manifest {
+//        attributes 'Main-Class': 'edu.tamu.aser.tide.tests.ReproduceBenchmarks'
+////        attributes 'Class-Path': 'my-lib.jar'
+//    }
+//}

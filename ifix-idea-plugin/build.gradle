@@ -1,0 +1,24 @@
+plugins {
+    id 'java'
+    id 'org.jetbrains.intellij' version '0.4.15'
+}
+
+group 'ann.iFix.plugin'
+
+// See https://github.com/JetBrains/gradle-intellij-plugin/
+intellij {
+    version '2019.2.4'
+}
+
+patchPluginXml {
+    changeNotes """
+      Add change notes here.<br>
+      <em>most HTML tags may be used</em>"""
+}
+
+dependencies{
+    compile(project(':ifix-main')) {
+        exclude group: 'ch.qos.logback'
+        exclude group: 'org.slf4j'
+    }
+}

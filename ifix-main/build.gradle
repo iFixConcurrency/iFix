@@ -1,0 +1,23 @@
+group = 'ann.iFix.main'
+apply plugin: 'application'
+dependencies {
+     compile project(':ifix-eclipse')
+     compile project(':ifix-increpta')
+     compile group: 'ch.qos.logback', name: 'logback-classic', version:logbackversion}
+
+jar {
+     from {
+          (configurations.runtime).collect {
+               it.isDirectory() ? it : zipTree(it)
+          }
+     }
+     //此行是当出现Invalid signature file digest for Manifest main attributes错误时添加
+     exclude 'META-INF/*.RSA', 'META-INF/*.SF','META-INF/*.DSA'
+
+     manifest {
+          attributes(
+                  'Main-Class': 'edu.tamu.aser.tide.tests.ReproduceBenchmarks'
+          )
+     }
+}
+mainClassName = 'ann.util.BenchmarkUtil'

@@ -1,0 +1,17 @@
+Race: <benchmarks.testcases.IncThread: void run()>|$r7.<benchmarks.testcases.CyclicDemo: int leader> = $i2|20 - <benchmarks.testcases.IncThread: void run()>|$r7.<benchmarks.testcases.CyclicDemo: int leader> = $i2|20
+
+Trace Size: 91
+Total #Threads: 5
+Total #SharedVariables: 2
+Total #Shared Read-Writes: 12
+Total #Local Read-Writes: 28
+Total #Initial Writes: 10
+Total #Synchronizations: 17
+Total #Branches: 24
+Total #Property Events: 0
+Total #Potential Violations: 1
+Total #Real Violations: 1
+
+real	0m8.559s
+user	0m6.128s
+sys	0m0.212s

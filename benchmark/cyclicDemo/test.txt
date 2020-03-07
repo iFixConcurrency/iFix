@@ -1,0 +1,7 @@
+1. compile commands
+		javac -d ./bin ./src/benchmarks/testcases/*.java
+
+		note: We have compiled it in advance, you can use it directly.
+2. run commands
+		cd bin
+		java benchmarks.testcases.CyclicDemo

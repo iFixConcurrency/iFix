@@ -1,0 +1,5 @@
+java\/awt\/.*
+java\/io\/.*
+java\/math\/.*
+java\/nio\/.*
+com\/apple\/.*

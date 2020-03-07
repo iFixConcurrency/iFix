@@ -1,0 +1,12 @@
+java\/applet\/.*
+java\/awt\/.*
+java\/beans\/.*
+java\/io\/.*
+java\/math\/.*
+java\/net\/.*
+java\/nio\/.*
+java\/rmi\/.*
+java\/security\/.*
+java\/sql\/.*
+java\/text\/.*
+
